@@ -1,0 +1,19 @@
+version: '3.8'
+services:
+  app:
+    build: .
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=development
+      - GOOGLE_CLIENT_ID=${GOOGLE_CLIENT_ID}
+      - JWT_SECRET=abcdef
+      - REDIS_URL=redis://madhukar:Madhukar@localhost:6379
+    depends_on:
+      - redis
+    volumes:
+      - .:/usr/src/app
+    command: npm start
+
+  redis:
+    image: "redis:alpine"
